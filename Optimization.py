@@ -29,6 +29,10 @@ class Optimization(object):
             fitness=scheduling.fitness_calculation(scheduling_result,population)
             if min(fitness)<gobal_best_fitness:
                 gobal_best_fitness=min(fitness)
+                idx=np.where(fitness==min(fitness))
+                #需要迭代更新的变量，需要使用tolist()处理
+                temp_gobal_best_individual=np.reshape(scheduling_result[idx[0]],(-1,(np.shape(task_set)[1]+1))).tolist()
+                gobal_best_individual=temp_gobal_best_individual
             print("第{}代适应度值为{}".format(gen, gobal_best_fitness))
             probability=selection.generate_probability(fitness,population)
             #遗传进化
@@ -42,6 +46,6 @@ class Optimization(object):
                     idx=selection.routewheel(probability,population)
                     population=operators.mutation(population,task_set,idx)
 
-        return gobal_best_fitness
+        return gobal_best_fitness,gobal_best_individual
 
 

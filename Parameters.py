@@ -9,7 +9,7 @@ class Parameters(object):
 
 
     def parameter_setting(self):
-        self.max_generation = 500
+        self.max_generation = 30
         self.population_size = 10
         self.alpha = 0.9
         self.beta = 0.1
